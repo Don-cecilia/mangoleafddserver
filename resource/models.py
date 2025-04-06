@@ -1,6 +1,7 @@
 # from ckeditor.fields import RichTextField
 from django.db import models
 import os
+from django.contrib.auth.models import User
 
 def upload_to_images(instance, filename):
     # Define the directory where the image will be uploaded
@@ -17,43 +18,19 @@ def upload_to_images(instance, filename):
 
 
 
-class Train(models.Model):
-    # Train
-    name = models.CharField(max_length=255, null=False)
-    capacity = models.IntegerField(null=False)
+class Leafdiseasedetector(models.Model):
+    # Leafdiseasedetector
+    #user is AbstractUser
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="leafdiseasedetector")
     date = models.DateTimeField(auto_now_add=True)
+    recommendation = models.TextField(blank=True, null=True)
+    disease = models.TextField(blank=True, null=True)
+    analysis = models.TextField(blank=True, null=True)
     images = models.ImageField(upload_to=upload_to_images, blank=True)
 
 
 
     def __str__(self):
-        return "{} ({})".format(self.name, self.capacity)
-
-
-
-class Station(models.Model):
-    # Station
-    name = models.CharField(max_length=255, null=False)
-    date = models.DateTimeField(auto_now_add=True)
-    images = models.ImageField(upload_to=upload_to_images, blank=True)
-
-
-
-    def __str__(self):
-        return "{}".format(self.name)
-
-
-
-class TrainClass(models.Model):
-    # Station
-    name = models.CharField(max_length=255, null=False)
-    price = models.IntegerField(null=False)
-    date = models.DateTimeField(auto_now_add=True)
-    images = models.ImageField(upload_to=upload_to_images, blank=True)
-
-
-
-    def __str__(self):
-        return "{} - {}".format(self.name, self.price)
+        return "{} ({})".format(self.user, self.date, self.images)
 
 

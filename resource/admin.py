@@ -1,9 +1,6 @@
 from django.contrib import admin
 
 
-from .models import Train, Station, TrainClass
+from .models import Leafdiseasedetector
 # Register your models here.
-admin.site.register(Train)
-admin.site.register(Station)
-admin.site.register(TrainClass)
-
+admin.site.register(Leafdiseasedetector)
